@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}New Complaint{% endblock %}
+{% block content %}
+<div class="form-card wide">
+    <h2>Submit New Complaint</h2>
+    <p class="muted">Give clear information so the admin can resolve it faster.</p>
+    <form method="POST">
+        <label>Room Number *</label>
+        <input type="text" name="room_no" required placeholder="e.g. G-102">
+
+        <label>Category *</label>
+        <select name="category" required>
+            <option value="">Select category</option>
+            <option>Water Problem</option>
+            <option>Electricity Problem</option>
+            <option>Cleaning Problem</option>
+            <option>Food/Mess Problem</option>
+            <option>Room Maintenance</option>
+            <option>Security Problem</option>
+            <option>Internet/Wi-Fi</option>
+            <option>Other</option>
+        </select>
+
+        <label>Subject *</label>
+        <input type="text" name="subject" required placeholder="Short complaint title">
+
+        <label>Priority</label>
+        <select name="priority">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+        </select>
+
+        <label>Description *</label>
+        <textarea name="description" required placeholder="Explain your problem in detail..."></textarea>
+
+        <button class="btn full" type="submit">Submit Complaint</button>
+    </form>
+</div>
+{% endblock %}

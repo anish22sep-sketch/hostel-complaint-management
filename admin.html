@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div><span class="badge">Administrator</span><h1>Complaint Management</h1></div>
+    <a class="btn secondary" href="{{ url_for('admin_users') }}">Manage Users</a>
+</div>
+
+<div class="stats">
+    <div class="stat"><span>Total</span><strong>{{ total }}</strong></div>
+    <div class="stat"><span>Pending</span><strong>{{ pending }}</strong></div>
+    <div class="stat"><span>In Progress</span><strong>{{ progress }}</strong></div>
+    <div class="stat"><span>Resolved</span><strong>{{ resolved }}</strong></div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>ID/User</th><th>Complaint</th><th>Priority</th><th>Status & Note</th><th>Action</th></tr></thead>
+<tbody>
+{% for c in complaints %}
+<tr>
+<td><strong>#{{ c['id'] }}</strong><br>{{ c['name'] }}<br><small>{{ c['email'] }}</small><br><small>{{ c['phone'] or '' }}</small></td>
+<td><strong>{{ c['subject'] }}</strong><br><small>{{ c['category'] }} • Room: {{ c['room_no'] or '-' }} • {{ c['created_at'] }}</small><p>{{ c['description'] }}</p></td>
+<td><span class="pill {{ c['priority']|lower }}">{{ c['priority'] }}</span></td>
+<td>
+<form method="POST" action="{{ url_for('update_status', id=c['id']) }}">
+<select name="status">
+<option {% if c['status']=='Pending' %}selected{% endif %}>Pending</option>
+<option {% if c['status']=='In Progress' %}selected{% endif %}>In Progress</option>
+<option {% if c['status']=='Resolved' %}selected{% endif %}>Resolved</option>
+</select>
+<textarea name="admin_note" class="small-area" placeholder="Admin note...">{{ c['admin_note'] or '' }}</textarea>
+<button class="btn small" type="submit">Update</button>
+</form>
+</td>
+<td>
+<form method="POST" action="{{ url_for('admin_delete', id=c['id']) }}" onsubmit="return confirm('Delete this complaint?')">
+<button class="danger-btn" type="submit">Delete</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
