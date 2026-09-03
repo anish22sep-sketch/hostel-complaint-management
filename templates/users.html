@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="badge">Admin</span><h1>Registered Users</h1></div></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Registered</th></tr></thead>
+<tbody>
+{% for u in users %}
+<tr><td>{{ u['id'] }}</td><td>{{ u['name'] }}</td><td>{{ u['email'] }}</td><td>{{ u['phone'] or '-' }}</td><td>{{ u['created_at'] }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

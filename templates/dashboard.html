@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div><span class="badge">User Dashboard</span><h1>Welcome, {{ session['name'] }}</h1></div>
+    <a class="btn" href="{{ url_for('complaint') }}">+ New Complaint</a>
+</div>
+
+{% if complaints %}
+<div class="table-wrap">
+<table>
+<thead><tr><th>ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+<tbody>
+{% for c in complaints %}
+<tr>
+<td>#{{ c['id'] }}</td>
+<td><strong>{{ c['subject'] }}</strong><br><small>{{ c['description'][:80] }}{% if c['description']|length > 80 %}...{% endif %}</small></td>
+<td>{{ c['category'] }}</td>
+<td><span class="pill {{ c['priority']|lower }}">{{ c['priority'] }}</span></td>
+<td><span class="pill status-{{ c['status']|lower|replace(' ', '-') }}">{{ c['status'] }}</span></td>
+<td>{{ c['created_at'] }}</td>
+<td>
+<form method="POST" action="{{ url_for('delete_complaint', id=c['id']) }}" onsubmit="return confirm('Delete this complaint?')">
+<button class="danger-btn" type="submit">Delete</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<div class="empty card"><h2>No complaints yet</h2><p>Create your first complaint to get started.</p><a class="btn" href="{{ url_for('complaint') }}">Submit Complaint</a></div>
+{% endif %}
+{% endblock %}
