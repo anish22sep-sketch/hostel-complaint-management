@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero">
+    <div>
+        <span class="badge">Python Flask Project</span>
+        <h1>Hostel Service & Complaint Management System</h1>
+        <p>Submit complaints, track progress and manage service requests from one simple platform.</p>
+        <div class="hero-actions">
+            <a class="btn" href="{{ url_for('register') }}">Create Account</a>
+            <a class="btn secondary" href="{{ url_for('login') }}">Login</a>
+        </div>
+    </div>
+</section>
+
+<section class="grid three">
+    <div class="card"><h3>Easy Submission</h3><p>Users can submit complaints with category, description and priority.</p></div>
+    <div class="card"><h3>Status Tracking</h3><p>Track Pending, In Progress and Resolved complaints.</p></div>
+    <div class="card"><h3>Admin Control</h3><p>Admins can review complaints, add notes and update status.</p></div>
+</section>
+{% endblock %}

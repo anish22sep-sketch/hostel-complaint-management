@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="form-card">
+    <h2>Create Account</h2>
+    <p class="muted">Register as a user.</p>
+    <form method="POST">
+        <label>Full Name *</label>
+        <input type="text" name="name" required placeholder="Your name">
+        <label>Email *</label>
+        <input type="email" name="email" required placeholder="you@example.com">
+        <label>Phone</label>
+        <input type="tel" name="phone" placeholder="10-digit phone number">
+        <label>Password *</label>
+        <input type="password" name="password" required minlength="6" placeholder="Minimum 6 characters">
+        <label>Confirm Password *</label>
+        <input type="password" name="confirm_password" required minlength="6">
+        <button class="btn full" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}
